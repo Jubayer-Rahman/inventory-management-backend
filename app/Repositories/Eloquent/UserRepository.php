@@ -15,6 +15,8 @@ class UserRepository implements UserRepositoryInterface
     public function create(array $data)
     {
         $this->user->create(Arr::only($data, $this->user->getFillable()));
-        return response()->json("User Created");
+        return response()->json([
+            'message' => "User Created"
+        ]);
     }
 }
