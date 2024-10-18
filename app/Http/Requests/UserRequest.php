@@ -24,7 +24,7 @@ class UserRequest extends FormRequest
         if ($this->isMethod('post')) {
             return [
                 'name' => 'required|regex:/^[A-Za-z\s]+$/|max:64',
-                'email' => 'required|email|max:254|unique:users',
+                'email' => 'required|email|max:255|unique:users',
                 'password' => 'required|min:5|confirmed',
             ];
         }
