@@ -9,13 +9,5 @@ use App\Services\Auth\AuthService;
 
 class AuthController extends Controller
 {
-    public function __construct(protected AuthService $authService)
-    {
-        $this->authService = $authService;
-    }
-
-    public function register(RegisterUserRequest $request)
-    {
-        $this->authService->register($request);
-    }
+    public function __construct(protected AuthService $authService) {}
 }

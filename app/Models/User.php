@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -42,7 +44,15 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'is_active' => 'boolean',
             'password' => 'hashed',
         ];
+    }
+
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            set: fn (string $value) => ucwords($value),
+        );
     }
 }

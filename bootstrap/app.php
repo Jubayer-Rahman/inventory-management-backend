@@ -22,7 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (Throwable $exception) {
             $response = [
-                'status' => 'error',
+                'success' => false,
                 'message' => getExceptionMessage($exception),
             ];
 
