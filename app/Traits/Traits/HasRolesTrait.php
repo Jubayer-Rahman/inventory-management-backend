@@ -7,16 +7,15 @@ use App\Models\Role;
 trait HasRolesTrait
 {
     /**
-     * Assign one or more roles to the user by names or IDs.
+     * Assign one or more roles to the user by names.
      *
-     * @param string|int|array $roles
+     * @param string|array $roles
      * @return void
      */
     public function assignRole($roles)
     {
         $roles = is_array($roles) ? $roles : [$roles];
-        $roleIds = Role::whereIn('id', $this->extractIds($roles))
-            ->orWhereIn('name', $this->extractNames($roles))
+        $roleIds = Role::whereIn('name', $roles)
             ->pluck('id')
             ->toArray();
 
@@ -26,16 +25,26 @@ trait HasRolesTrait
     }
 
     /**
-     * Remove one or more roles from the user by names or IDs.
+     * Check if the user has a role by name.
      *
-     * @param string|int|array $roles
+     * @param string $role
+     * @return bool
+     */
+    public function hasRole(string $role)
+    {
+        return $this->roles()->where('name', $role)->exists();
+    }
+
+    /**
+     * Remove one or more roles from the user by names.
+     *
+     * @param string|array $roles
      * @return void
      */
     public function removeRole($roles)
     {
         $roles = is_array($roles) ? $roles : [$roles];
-        $roleIds = Role::whereIn('id', $this->extractIds($roles))
-            ->orWhereIn('name', $this->extractNames($roles))
+        $roleIds = Role::whereIn('name', $roles)
             ->pluck('id')
             ->toArray();
 
@@ -45,40 +54,17 @@ trait HasRolesTrait
     }
 
     /**
-     * Sync roles for the user by names or IDs (assign multiple roles and remove others).
+     * Sync roles for the user by names (assign multiple roles and remove others).
      *
      * @param array $roles
      * @return void
      */
     public function syncRoles(array $roles)
     {
-        $roleIds = Role::whereIn('id', $this->extractIds($roles))
-            ->orWhereIn('name', $this->extractNames($roles))
+        $roleIds = Role::whereIn('name', $roles)
             ->pluck('id')
             ->toArray();
 
         $this->roles()->sync($roleIds);
-    }
-
-    /**
-     * Extract IDs from a mixed array of role names and IDs.
-     *
-     * @param array $roles
-     * @return array
-     */
-    private function extractIds(array $roles)
-    {
-        return array_filter($roles, 'is_numeric');
-    }
-
-    /**
-     * Extract names from a mixed array of role names and IDs.
-     *
-     * @param array $roles
-     * @return array
-     */
-    private function extractNames(array $roles)
-    {
-        return array_filter($roles, 'is_string');
     }
 }
