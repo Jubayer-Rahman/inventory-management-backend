@@ -29,8 +29,7 @@ class UserSeeder extends Seeder
      */
     private function createUserWithRole(string $roleName, int $count)
     {
-        $role = $this->getRoleName($roleName);
-        if ($role === null) {
+        if (!$this->roleExists($roleName)) {
             return;
         }
 
@@ -44,7 +43,7 @@ class UserSeeder extends Seeder
                 'email' => $email,
             ]);
 
-            $user->assignRole($role);
+            $user->assignRole($roleName);
         }
     }
 
@@ -60,20 +59,19 @@ class UserSeeder extends Seeder
     }
 
     /**
-     * Get role name or display error.
+     * Check if the role exists in the database.
      *
      * @param string $roleName
-     * @return string|null
+     * @return bool
      */
-    private function getRoleName(string $roleName): ?string
+    private function roleExists(string $roleName): bool
     {
-        $role = Role::where('name', $roleName)->first();
+        $roleExists = Role::where('name', $roleName)->exists();
 
-        if (!$role) {
+        if (!$roleExists) {
             $this->command->error("Role '{$roleName}' not found.");
-            return null;
         }
 
-        return $role->name;
+        return $roleExists;
     }
 }
