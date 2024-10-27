@@ -3,36 +3,25 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserInvitationRequest;
-use App\Models\UserInvitation;
+use App\Repositories\Interfaces\RoleRepositoryInterface;
 use Illuminate\Http\Request;
 
-class UserInvitationController extends Controller
+class RoleController extends Controller
 {
+    //public function __construct(protected RoleRepositoryInterface $roleRepository) {}
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, RoleRepositoryInterface $roleRepository)
     {
-        //
+        return apiSuccessResponse('Roles retrieved', $roleRepository->index($request));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserInvitationRequest $request)
-    {
-        // Create the UserInvitation record
-        UserInvitation::create($request->validated());
-
-        // Return a success response
-        return apiSuccessResponse("Invitation created");
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function store(Request $request)
     {
         //
     }

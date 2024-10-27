@@ -10,4 +10,9 @@ use App\Services\Auth\AuthService;
 class AuthController extends Controller
 {
     public function __construct(protected AuthService $authService) {}
+
+    public function login()
+    {
+
+    }
 }

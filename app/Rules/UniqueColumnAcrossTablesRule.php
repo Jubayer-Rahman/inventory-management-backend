@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class UniqueColumnAcrossTablesRule implements ValidationRule
 {
     /**
-     * Create a new rule instance.
+     * Checks if a column value exists across different tables in database.
      *
      * @param array<string, string> $tables An associative array of table names and their error messages.
      */

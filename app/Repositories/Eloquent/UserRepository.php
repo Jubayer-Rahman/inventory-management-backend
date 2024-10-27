@@ -8,10 +8,8 @@ use Illuminate\Support\Arr;
 
 class UserRepository implements UserRepositoryInterface
 {
-    public function __construct(protected User $user)
-    {
-        $this->user = $user;
-    }
+    public function __construct(protected User $user) {}
+
     public function store(array $data)
     {
         $this->user->create(Arr::only($data, $this->user->getFillable()));
