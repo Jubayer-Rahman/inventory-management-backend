@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', 'App\Http\Controllers\Api\UserController@store');
-Route::post('/login', 'App\Http\Controllers\Api\Auth\AuthController@login');
+Route::post('/login', 'App\Http\Controllers\Api\Auth\AuthController@login')->name('login');
+Route::delete('/logout', 'App\Http\Controllers\Api\Auth\AuthController@logout')->middleware('auth:sanctum');
 
 Route::apiResource('/user-invitations', 'App\Http\Controllers\Api\Auth\UserInvitationController')->except(['show', 'update']);
 Route::apiResource('/roles', 'App\Http\Controllers\Api\RoleController')->except('show');
