@@ -4,7 +4,6 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
-use Illuminate\Support\Arr;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -12,6 +11,12 @@ class UserRepository implements UserRepositoryInterface
 
     public function store(array $data)
     {
-        $this->user->create(Arr::only($data, $this->user->getFillable()));
+        User::create($data);
+    }
+
+    public function update(array $data, User $user): User
+    {
+        $user->update($data);
+        return $user;
     }
 }

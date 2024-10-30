@@ -40,7 +40,7 @@ class LoginRequest extends FormRequest
         $user = User::firstWhere('email', $this->email);
 
         if (! $user || ! Hash::check($this->password, $user->password)) {
-            throw ValidationException::withMessages(['invalid_credentials' => 'Incorrect email or password']);
+            throw ValidationException::withMessages(['email' => 'Incorrect email or password']);
         }
 
         return $user;
