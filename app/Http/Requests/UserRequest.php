@@ -34,7 +34,7 @@ class UserRequest extends FormRequest
         ];
     }
 
-    public function updateRules(): array
+    private function updateRules(): array
     {
         return [
             'name' => 'regex:/^[A-Za-z\s]+$/|max:64',

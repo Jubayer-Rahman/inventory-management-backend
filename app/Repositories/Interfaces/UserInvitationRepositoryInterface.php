@@ -2,7 +2,6 @@
 
 namespace App\Repositories\Interfaces;
 
-use App\Models\UserInvitation;
 use Illuminate\Http\Request;
 
 interface UserInvitationRepositoryInterface
