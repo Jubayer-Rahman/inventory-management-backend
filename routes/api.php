@@ -19,3 +19,5 @@ Route::apiResource('/variations', 'App\Http\Controllers\Api\VariationController'
 Route::apiResource('/variations.options', 'App\Http\Controllers\Api\VariationOptionController')->only(['index', 'store']);
 Route::patch('/variations/{variation}/options', 'App\Http\Controllers\Api\VariationOptionController@update');
 Route::delete('/variations/{variation}/options', 'App\Http\Controllers\Api\VariationOptionController@destroy');
+
+// Product and Product Variation
