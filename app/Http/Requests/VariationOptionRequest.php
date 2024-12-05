@@ -50,7 +50,7 @@ class VariationOptionRequest extends FormRequest
     {
         $variationId = $this->route('variation');
         return [
-            'name' => 'string|max:32|unique:variations,name',
+            'name' => 'string|max:32|unique:variations',
             'options' => 'array',
             'options.*.id' => [
                 'required_with:options',

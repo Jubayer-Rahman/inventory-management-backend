@@ -13,8 +13,8 @@ class Product extends Model
     protected $fillable = [
         'name',
         'description',
-        'variation_options',
         'base_price',
+        'total_quantity',
         'is_active'
     ];
 
@@ -42,5 +42,10 @@ class Product extends Model
     public function variations()
     {
         return $this->hasMany(ProductVariation::class);
+    }
+
+    public function variationOptions()
+    {
+        return $this->belongsToMany(VariationOption::class, 'product_variation_option');
     }
 }

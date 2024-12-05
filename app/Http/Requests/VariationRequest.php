@@ -22,7 +22,7 @@ class VariationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:32|unique:variations,name',
+            'name' => 'required|string|max:32|unique:variations',
             'options' => 'required|array',
             'options.*' => 'string|max:32|distinct',
         ];

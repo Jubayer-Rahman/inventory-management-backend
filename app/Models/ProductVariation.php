@@ -12,9 +12,9 @@ class ProductVariation extends Model
 
     protected $fillable = [
         'product_id',
-        'slug',
-        'quantity',
+        'variation_combination',
         'price',
+        'quantity',
         'is_active'
     ];
 

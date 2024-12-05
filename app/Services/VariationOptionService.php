@@ -5,17 +5,14 @@ namespace App\Services;
 use App\Models\Variation;
 use App\Models\VariationOption;
 use App\Repositories\Interfaces\VariationOptionRepositoryInterface;
-use App\Repositories\Interfaces\VariationRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class VariationOptionService
 {
     public function __construct(
         private VariationOptionRepositoryInterface $variationOptionRepository,
-        private VariationRepositoryInterface $variationRepository,
         private VariationOption $variationOption
     ) {}
 
